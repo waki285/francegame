@@ -114,7 +114,7 @@
                     }
                     localStorage.countpoint=(localStorage.countpoint-0)+(tensuu-0);
                     localStorage.counttime++;
-                    avg=localStorage.countpoint/localStorage.counttime;
+                    avg=Math.floor(localStorage.countpoint/localStorage.counttime*10)/10;
                     
                     switch (tensuu) {
                         case 100:
