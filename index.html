@@ -114,7 +114,7 @@
                     }
                     localStorage.countpoint=(localStorage.countpoint-0)+(tensuu-0);
                     localStorage.counttime++;
-                    avg=Math.floor(localStorage.countpoint/localStorage.counttime);
+                    avg=Math.floor(localStorage.countpoint/localStorage.counttime*10)/10;
                     
                     switch (tensuu) {
                         case 100:
@@ -135,7 +135,8 @@
                         title: tensuu+"点!!!"+review,
                         text:"平均点:"+avg,
 			confirmButtonText : "もう一回遊べるドン！",
-                        showClass: {
+                        confirmButtonColor : "#002780",
+			showClass: {
                             popup: 'animate__animated animate__fadeInDown'
                         },
                         hideClass: {
