@@ -1,0 +1,50 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+html {
+  background-color: gray;
+}
+
+.blue {
+  color: #002780;
+}
+
+.white {
+  color: white;
+}
+
+.red {
+  color: #f31931;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+input[type=checkbox] + label:before {
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f096";
+  letter-spacing: 10px;
+}
+input[type=checkbox]:checked + label:before {
+  content: "\f046";
+  letter-spacing: 5px;
+}
+
+.button {
+  display: inline-block;
+  font-size: 10pt;
+  text-align: center;
+  cursor: pointer;
+  padding: 12px 12px;
+  background: #002780;
+  color: #ffffff;
+  line-height: 0.1em;
+  transition: 0.3s;
+  box-shadow: 3px 3px #666666;
+  border: 2px solid #002780;
+  text-decoration: none;
+}
+.button:hover {
+  box-shadow: none;
+  color: #002780;
+  background: #ffffff;
+}/*# sourceMappingURL=frgm.css.map */
