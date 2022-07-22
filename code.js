@@ -155,7 +155,7 @@ const whenStop = () => {
     title: tensuu + "点!!!" + review,
     text: "平均点:" + avg,
     confirmButtonText: "もう一回遊べるドン！",
-    confirmButtonColor: "#002780",
+    confirmButtonColor: "#f31931",
     showClass: {
       popup: "animate__animated animate__fadeInDown",
     },
