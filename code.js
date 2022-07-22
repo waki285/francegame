@@ -19,12 +19,12 @@ var kari;
 var italyCo = 0;
 var gameStart = document.querySelector("#gameStart");
 var flagStop = document.querySelector("#flagStop");
+var game = document.querySelector("#game");
 gameStart.addEventListener("click", (e) => {
   e.preventDefault();
   run();
 });
-flagStop.addEventListener("click", (e) => {
-  e.preventDefault();
+game.addEventListener("click", (e) => {
   whenStop();
 });
 if (isNaN(localStorage.countpoint)) {
@@ -35,11 +35,6 @@ const spx2 = document.diff.spx2;
 const ita = document.diff.ita;
 const inv = document.diff.inv;
 
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && moreEnter) {
-    run();
-  }
-});
 const mikio = {
   x: null,
   y: null,
@@ -116,11 +111,6 @@ const run = () => {
   moreEnter--;
   document.getElementById("start").style.display = "none";
   document.getElementById("game").style.display = "inline-block";
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "s" && canMove) {
-      whenStop();
-    }
-  });
 
   init();
   loop();
