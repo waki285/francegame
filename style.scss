@@ -1,0 +1,67 @@
+@import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
+
+$fb: #002780;
+$fr: #f31931;
+
+html {
+  background-color: gray;
+}
+
+.blue {
+  color: $fb;
+}
+
+.white {
+  color: white;
+}
+
+.red {
+  color: $fr;
+}
+
+#game {
+  display: none;
+}
+
+input[type="checkbox"] {
+  display: none;
+  + label:before {
+    font-family: FontAwesome;
+    display: inline-block;
+    content: "\f096";
+    letter-spacing: 10px;
+  }
+
+  &:checked + label:before {
+    content: "\f046";
+    letter-spacing: 5px;
+  }
+}
+
+@mixin baseButton($bColor, $lColor: white) {
+  display: inline-block;
+  font-size: 10pt;
+  text-align: center;
+  cursor: pointer;
+  padding: 12px 12px;
+  background: $bColor;
+  color: $lColor;
+  line-height: 0.1em;
+  transition: 0.3s;
+  box-shadow: 3px 3px #666666;
+  text-decoration: none;
+  border: 2px solid $bColor;
+  &:hover {
+    box-shadow: none;
+    color: $bColor;
+    background: $lColor;
+  }
+}
+
+#gameStart {
+  @include baseButton($fb);
+}
+
+#flagStop {
+  @include baseButton(white, gray);
+}
