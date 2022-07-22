@@ -2,9 +2,20 @@
 
 $fb: #002780;
 $fr: #f31931;
+$wd: 1152px;
+$ht: 924px;
 
 html {
-  background-color: gray;
+  background: linear-gradient(
+    180deg,
+    $fb 0%,
+    $fb 33.3%,
+    #ffffff 33.3%,
+    #ffffff 66.6%,
+    $fr 66.6%,
+    $fr 100%
+  );
+  text-align: center;
 }
 
 .blue {
@@ -21,6 +32,14 @@ html {
 
 #game {
   display: none;
+}
+
+#frame {
+  background-color: gray;
+  max-width: $wd * 4/5;
+  height: $ht * 24/25;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 input[type="checkbox"] {

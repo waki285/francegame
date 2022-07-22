@@ -1,6 +1,6 @@
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
-canvas.width = 1000;
+canvas.width = 900;
 canvas.height = 600;
 canvas.setAttribute(
   "style",
@@ -103,7 +103,7 @@ const Invisible = () => {
 };
 
 const run = () => {
-  document.body.appendChild(canvas);
+  game.insertBefore(canvas, flagStop);
   if (spx2.checked) {
     mikio.speed = 15;
   }

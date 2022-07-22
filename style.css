@@ -1,6 +1,7 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 html {
-  background-color: gray;
+  background: linear-gradient(180deg, #002780 0%, #002780 33.3%, #ffffff 33.3%, #ffffff 66.6%, #f31931 66.6%, #f31931 100%);
+  text-align: center;
 }
 
 .blue {
@@ -17,6 +18,14 @@ html {
 
 #game {
   display: none;
+}
+
+#frame {
+  background-color: gray;
+  max-width: 921.6px;
+  height: 887.04px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 input[type=checkbox] {
