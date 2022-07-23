@@ -1,7 +1,7 @@
 const canvas = document.createElement("canvas");
 const ctx = canvas.getContext("2d");
 canvas.width = 900;
-canvas.height = 600;
+canvas.height = 400;
 canvas.setAttribute(
   "style",
   "display:block;margin:auto;background-color: #ffffff"

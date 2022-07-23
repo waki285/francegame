@@ -18,6 +18,11 @@ html {
   text-align: center;
 }
 
+body{
+  width: $wd;
+  height: $ht;
+}
+
 .blue {
   color: $fb;
 }
@@ -40,6 +45,7 @@ html {
   height: $ht * 24/25;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 10px;
 }
 
 input[type="checkbox"] {
