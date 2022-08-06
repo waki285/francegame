@@ -62,22 +62,22 @@ input[type=checkbox]:checked + label:before {
   background: white;
 }
 
-#flagStop {
+#howTo {
   display: inline-block;
   font-size: 10pt;
   text-align: center;
   cursor: pointer;
   padding: 12px 12px;
-  background: white;
-  color: gray;
+  background: #f31931;
+  color: white;
   line-height: 0.1em;
   transition: 0.3s;
   box-shadow: 3px 3px #666666;
   text-decoration: none;
-  border: 2px solid white;
+  border: 2px solid #f31931;
 }
-#flagStop:hover {
+#howTo:hover {
   box-shadow: none;
-  color: white;
-  background: gray;
+  color: #f31931;
+  background: white;
 }/*# sourceMappingURL=style.css.map */

@@ -20,12 +20,35 @@ var italyCo = 0;
 var gameStart = document.querySelector("#gameStart");
 var flagStop = document.querySelector("#flagStop");
 var game = document.querySelector("#game");
+var how = document.querySelector("#howTo");
 gameStart.addEventListener("click", (e) => {
   e.preventDefault();
   run();
 });
 game.addEventListener("click", (e) => {
   whenStop();
+});
+how.addEventListener("click", (e) => {
+  Swal.fire({
+    html: `
+    <div style="color:black">
+    <h2>操作方法</h2>
+    <p>Sを押すと国旗がストップします</p>
+    <p>出来上がったものが実際の国旗に近いほど高得点です</p>
+    </div>
+    `,
+    showConfirmButton: true,
+    confirmButtonText: "おっけー！",
+    width: "40rem",
+    background:
+      "linear-gradient(90deg, #002780 0%, #002780 33.3%, #ffffff 33.3%, #ffffff 66.6%, #f31931 66.6%, #f31931 100%)",
+    showClass: {
+      popup: "animate__animated animate__zoomInDown animate__fast",
+    },
+    hideClass: {
+      popup: "animate__animated animate__zoomOut",
+    },
+  });
 });
 if (isNaN(localStorage.countpoint)) {
   localStorage.countpoint = 0;
@@ -88,7 +111,6 @@ const init = () => {
   nomoto.x = (canvas.width + hWid) / 2;
   nomoto.y = canvas.height - nomoto.height;
 };
-
 const Italy = () => {
   country = "italy";
 };
@@ -111,6 +133,12 @@ const run = () => {
   moreEnter--;
   document.getElementById("start").style.display = "none";
   document.getElementById("game").style.display = "inline-block";
+
+  document.body.addEventListener("keydown", (e) => {
+    if (e.key === "s") {
+      whenStop();
+    }
+  });
 
   init();
   loop();
@@ -147,10 +175,10 @@ const whenStop = () => {
     confirmButtonText: "もう一回遊べるドン！",
     confirmButtonColor: "#f31931",
     showClass: {
-      popup: "animate__animated animate__fadeInDown",
+      popup: "animate__animated animate__zoomIn",
     },
     hideClass: {
-      popup: "animate__animated animate__fadeOutUp",
+      popup: "animate__animated animate__zoomOut",
     },
   }).then((result) => {
     location.reload();
