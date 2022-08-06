@@ -26,6 +26,7 @@ html {
   height: 887.04px;
   margin-left: auto;
   margin-right: auto;
+  border-radius: 10px;
 }
 
 input[type=checkbox] {
