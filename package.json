@@ -19,6 +19,7 @@
   "homepage": "https://github.com/gyuudonumai/francegame#readme",
   "dependencies": {
     "@vercel/node": "^1.14.1",
+    "dotenv": "^16.0.2",
     "express": "^4.18.1",
     "mongoose": "^6.6.0"
   }
