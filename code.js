@@ -21,6 +21,9 @@ var gameStart = document.querySelector("#gameStart");
 var flagStop = document.querySelector("#flagStop");
 var game = document.querySelector("#game");
 var how = document.querySelector("#howTo");
+if (!localStorage.name){
+  alert();
+}
 gameStart.addEventListener("click", (e) => {
   e.preventDefault();
   run();
@@ -53,6 +56,7 @@ how.addEventListener("click", (e) => {
 if (isNaN(localStorage.countpoint)) {
   localStorage.countpoint = 0;
   localStorage.counttime = 0;
+  localStorage.name = 0;
 }
 const spx2 = document.diff.spx2;
 const ita = document.diff.ita;
