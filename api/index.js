@@ -1,0 +1,32 @@
+const express = require("express");
+const app = express();
+const path = require("node:path");
+const mongoose = require("mongoose");
+
+const schema = new mongoose.Schema({
+    point: Number
+});
+
+const DB = mongoose.createConnection(process.env.MONGO);
+
+const model = DB.model("pointSchema", schema);
+
+app.use(express.static(path.join(__dirname, "..", "public")));
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+app.route("/api/average")
+    .get(async (req, res) => {
+        const all = await model.find({});
+        const points = all.map(x => x.point);
+        const average = points.reduce((a, b) => a + b) / points.length;
+        res.json({ average });
+    })
+    .post(async (req, res) => {
+        if (req.body.point) return res.send("No point specified");
+        const n = new model({ point: req.body.point });
+        await n.save();
+        res.json({ status: true });
+    });
+
+app.listen(8080, () => console.log("Running5"));

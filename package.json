@@ -1,0 +1,25 @@
+{
+  "name": "francegame",
+  "version": "1.0.0",
+  "description": "フランスのゲーム、ふらげーです。\r Enter で開始\r S でストップ\r 完全なるフランス国旗を目指しましょう\r ちなみに私が一番好きな国はイタリアです",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gyuudonumai/francegame.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gyuudonumai/francegame/issues"
+  },
+  "homepage": "https://github.com/gyuudonumai/francegame#readme",
+  "dependencies": {
+    "@vercel/node": "^1.14.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.6.0"
+  }
+}
