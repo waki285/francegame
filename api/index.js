@@ -27,7 +27,7 @@ app.route("/api/average")
         res.json({ average });
     })
     .post(async (req, res) => {
-        if (!req.body.point) return res.send("No point specified");
+        if (req.body.point === undefined) return res.send("No point specified");
         const n = new model({ point: req.body.point });
         await n.save();
         res.json({ status: true });
