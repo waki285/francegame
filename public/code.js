@@ -158,6 +158,8 @@ const whenStop = () => {
   avg =
     Math.floor((localStorage.countpoint / localStorage.counttime) * 10) / 10;
 
+  fetch("/api/average", { method: "POST", body: JSON.stringify({ point: tensuu }) });
+
   switch (tensuu) {
     case 100:
     case 90:
