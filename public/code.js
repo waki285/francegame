@@ -65,9 +65,9 @@ const spx2 = document.diff.spx2;
 const ita = document.diff.ita;
 const inv = document.diff.inv;
 
-if (localStorage.getItem("1.5")) spx2.checked = true;
+if (localStorage.getItem("1.5") === true) spx2.checked = true;
 if (localStorage.getItem("world") === "italy") ita.checked = true;
-if (localStorage.getItem("invisible")) inv.checked = true;
+if (localStorage.getItem("invisible") === true) inv.checked = true;
 
 const mikio = {
   x: null,
