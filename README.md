@@ -1,3 +1,5 @@
+フランスゲームは移転しました [ここ](https://francegame.vercel.app)
+
 フランスのゲーム、ふらげーです。
 Enter で開始
 S でストップ
