@@ -36,8 +36,17 @@ app.route("/api/average")
 app.post("/api/reset", async (req, res) => {
   if (req.body.password === "italy") {
     await model.deleteMany({ __v: 0 });
-    res.send("Succees");
+    res.send("Success");
+    return;
+  } else {
+    res.send("no");
+    return;
   }
+});
+
+app.get("/api/count", async (req, res) => {
+  const bo = await model.find({});
+  res.json({ count: bo.length });
 })
 
 app.listen(8080, () => console.log("Running5"));

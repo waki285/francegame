@@ -65,6 +65,10 @@ const spx2 = document.diff.spx2;
 const ita = document.diff.ita;
 const inv = document.diff.inv;
 
+if (localStorage.getItem("1.5")) spx2.checked = true;
+if (localStorage.getItem("world") === "italy") ita.checked = true;
+if (localStorage.getItem("invisible")) inv.checked = true;
+
 const mikio = {
   x: null,
   y: null,
@@ -130,6 +134,9 @@ let isAllowed = true;
 
 const run = () => {
   game.insertBefore(canvas, flagStop);
+  localStorage.setItem("1.5", spx2.checked);
+  localStorage.setItem("world", ita.checked ? "italy": "france");
+  localStorage.setItem("invisible", inv.checked);
   if (spx2.checked) {
     mikio.speed = 15;
   }
