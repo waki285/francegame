@@ -47,6 +47,11 @@ app.post("/api/reset", async (req, res) => {
 app.get("/api/count", async (req, res) => {
   const bo = await model.find({});
   res.json({ count: bo.length });
+});
+
+app.get("/api/all-average", async (req, res) => {
+  const bo = await model.find({});
+  res.json(bo);
 })
 
 app.listen(8080, () => console.log("Running5"));
