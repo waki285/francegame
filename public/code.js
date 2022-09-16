@@ -126,6 +126,8 @@ const Invisible = () => {
   country = "invisible";
 };
 
+let isAllowed = true;
+
 const run = () => {
   game.insertBefore(canvas, flagStop);
   if (spx2.checked) {
@@ -142,6 +144,7 @@ const run = () => {
   document.getElementById("game").style.display = "inline-block";
 
   document.body.addEventListener("keydown", (e) => {
+    if (!isAllowed) return;
     if (e.key === "s") {
       whenStop();
     }
@@ -189,7 +192,9 @@ const whenStop = () => {
     hideClass: {
       popup: "animate__animated animate__zoomOut",
     },
+    allowOutsideClick: () => false
   }).then((result) => {
+    isAllowed = false;
     location.reload();
   });
 };
