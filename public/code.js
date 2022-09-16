@@ -25,6 +25,7 @@ var worldaverage = document.getElementById("worldaverage");
 if (!localStorage.name){
   alert();
 }
+if (location.href.includes("github") && !location.href.includes("preview")) location.href = "https://francegame.vercel.app";
 fetch("/api/average")
 .then(x => x.json()).then(x => worldaverage.innerText = Math.round(x.average));
 gameStart.addEventListener("click", (e) => {
@@ -66,7 +67,7 @@ const ita = document.diff.ita;
 const inv = document.diff.inv;
 
 if (localStorage.getItem("1.5") === "true") spx2.checked = true;
-if (localStorage.getItem("world") === "italy") ita.checked = true;
+if (localStorage.getItem("world")) [...ita].find(x => x.value === localStorage.getItem("world")).selected = true;
 if (localStorage.getItem("invisible") === "true") inv.checked = true;
 
 const mikio = {
@@ -80,8 +81,12 @@ const mikio = {
       ctx.fillStyle = "#002780";
     } else if (country == "italy") {
       ctx.fillStyle = "#009246";
+    } else if (country === "cote") {
+      ctx.fillStyle = "#f77f00";
     } else if (country == "invisible") {
       ctx.fillStyle = "#ffffff";
+    } else if (country === "romania") {
+      ctx.fillStyle = "#002b7f";
     }
 
     ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -101,8 +106,12 @@ const nomoto = {
       ctx.fillStyle = "#f31931";
     } else if (country == "italy") {
       ctx.fillStyle = "#ce2b37";
+    } else if (country === "cote") {
+      ctx.fillStyle = "#009e60";
     } else if (country == "invisible") {
       ctx.fillStyle = "#ffffff";
+    } else if (country === "romania") {
+      ctx.fillStyle = "#ce1126";
     }
 
     ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -122,9 +131,19 @@ const init = () => {
   nomoto.x = (canvas.width + hWid) / 2;
   nomoto.y = canvas.height - nomoto.height;
 };
+const France = () => {
+  country = "france";
+}
 const Italy = () => {
   country = "italy";
 };
+const Cote = () => country = "cote";
+const Romania = () => {
+  country = "romania";
+  canvas.style.backgroundColor = "#fcd116";
+}
+const countries = [France, Italy, Cote, Romania];
+
 
 const Invisible = () => {
   country = "invisible";
@@ -135,13 +154,19 @@ let isAllowed = true;
 const run = () => {
   game.insertBefore(canvas, flagStop);
   localStorage.setItem("1.5", spx2.checked);
-  localStorage.setItem("world", ita.checked ? "italy": "france");
+  localStorage.setItem("world", ita.value);
   localStorage.setItem("invisible", inv.checked);
   if (spx2.checked) {
     mikio.speed = 15;
   }
-  if (ita.checked) {
+  if (ita.value === "italy") {
     Italy();
+  } else if (ita.value === "random") {
+    countries[Math.floor(Math.random() * countries.length)]();
+  } else if (ita.value === "cote") {
+    Cote();
+  } else if (ita.value === "romania") {
+    Romania();
   }
   if (inv.checked) {
     Invisible();
@@ -153,9 +178,15 @@ const run = () => {
   document.body.addEventListener("keydown", (e) => {
     if (!isAllowed) return;
     if (e.key === "s") {
+      isAllowed = false;
       whenStop();
     }
   });
+  document.body.addEventListener("touchstart", (e) => {
+    if (!isAllowed) return;
+    isAllowed = false;
+    whenStop();
+  })
 
   init();
   loop();

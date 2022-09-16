@@ -9,7 +9,7 @@ const schema = new mongoose.Schema({
     point: Number
 });
 
-const DB = mongoose.createConnection(process.env.MONGO);
+const DB = mongoose.createConnection(process.env.NODE_ENV === "production" ? process.env.MONGO:"mongodb+srv://1:1@cluster0.jqtuvzr.mongodb.net/?retryWrites=true&w=majority");
 
 const model = DB.model("pointSchema", schema);
 
@@ -22,6 +22,7 @@ app.get("/", (req, res) => res.sendFile(path.join(__dirname, "..", "public", "in
 app.route("/api/average")
     .get(async (req, res) => {
         const all = await model.find({});
+        if (all.length === 0) return res.json({ average: 0 });
         const points = all.map(x => x.point);
         const average = points.reduce((a, b) => a + b) / points.length;
         res.json({ average });
@@ -51,7 +52,7 @@ app.get("/api/count", async (req, res) => {
 
 app.get("/api/all-average", async (req, res) => {
   const bo = await model.find({});
-  res.json(bo);
+  res.json(bo.map(x => x.point));
 })
 
 app.listen(8080, () => console.log("Running5"));
