@@ -166,20 +166,9 @@ const whenStop = () => {
 
   fetch("/api/average", { method: "POST", body: JSON.stringify({ point: tensuu }), headers: { "content-type": "application/json" } }).then(x => x.text()).then(x => console.log(x));
 
-  switch (tensuu) {
-    case 100:
-    case 90:
-    case 80:
-      review = "無駄な才能が一つ見つかったねwwwwwwwww";
-      break;
-
-    case 70:
-      review = "普通だねwwwwwwwwww";
-      break;
-
-    default:
-      review = "ざっこwwwwwwww";
-  }
+  if (tensuu === 70) review = "普通だねwwwwwwwwww";
+  else if (tensuu > 70) review = "無駄な才能が一つ見つかったねwwwwwwwww";
+  else review = "ざっこwwwwwwww";
   canMove = !canMove;
   Swal.fire({
     title: tensuu + "点!!!" + review,
