@@ -26,7 +26,7 @@ if (!localStorage.name){
   alert();
 }
 fetch("/api/average")
-.then(x => x.json()).then(x => worldaverage.innerText = x.point);
+.then(x => x.json()).then(x => worldaverage.innerText = Math.round(x.average));
 gameStart.addEventListener("click", (e) => {
   e.preventDefault();
   run();
