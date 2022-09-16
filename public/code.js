@@ -21,9 +21,12 @@ var gameStart = document.querySelector("#gameStart");
 var flagStop = document.querySelector("#flagStop");
 var game = document.querySelector("#game");
 var how = document.querySelector("#howTo");
+var worldaverage = document.getElementById("worldaverage");
 if (!localStorage.name){
   alert();
 }
+fetch("/api/average")
+.then(x => x.json()).then(x => worldaverage.innerText = x.point);
 gameStart.addEventListener("click", (e) => {
   e.preventDefault();
   run();
