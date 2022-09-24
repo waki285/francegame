@@ -13,6 +13,7 @@ var review;
 var canStart = false;
 var moreEnter = 1;
 var fin = 0;
+let InvisibleStyle = "#ffffff";
 var country = "france";
 var avg;
 var kari;
@@ -87,7 +88,7 @@ const mikio = {
     } else if (country === "cote") {
       ctx.fillStyle = "#f77f00";
     } else if (country == "invisible") {
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = InvisibleStyle;
     } else if (country === "romania") {
       ctx.fillStyle = "#002b7f";
     }
@@ -112,7 +113,7 @@ const nomoto = {
     } else if (country === "cote") {
       ctx.fillStyle = "#009e60";
     } else if (country == "invisible") {
-      ctx.fillStyle = "#ffffff";
+      ctx.fillStyle = InvisibleStyle;
     } else if (country === "romania") {
       ctx.fillStyle = "#ce1126";
     }
@@ -144,6 +145,7 @@ const Cote = () => country = "cote";
 const Romania = () => {
   country = "romania";
   canvas.style.backgroundColor = "#fcd116";
+  InvisibleStyle = "#fcd116";
 }
 const countries = [France, Italy, Cote, Romania];
 
