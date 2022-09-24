@@ -6,7 +6,8 @@ const path = require("node:path");
 const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
-    point: Number
+    point: Number,
+    username: String
 });
 
 const DB = mongoose.createConnection(process.env.NODE_ENV === "production" ? process.env.MONGO:"mongodb+srv://1:1@cluster0.jqtuvzr.mongodb.net/?retryWrites=true&w=majority");
@@ -29,7 +30,7 @@ app.route("/api/average")
     })
     .post(async (req, res) => {
         if (req.body.point === undefined) return res.send("No point specified");
-        const n = new model({ point: req.body.point });
+        const n = new model({ point: req.body.point, username: req.body.username || "匿名" });
         await n.save();
         res.json({ status: true });
     });
@@ -52,7 +53,7 @@ app.get("/api/count", async (req, res) => {
 
 app.get("/api/all-average", async (req, res) => {
   const bo = await model.find({});
-  res.json(bo.map(x => x.point));
+  res.json(bo.map(x => String(x.point) + " " + x.username));
 })
 
 app.listen(8080, () => console.log("Running5"));

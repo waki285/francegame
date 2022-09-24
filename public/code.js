@@ -205,7 +205,7 @@ const whenStop = () => {
   avg =
     Math.floor((localStorage.countpoint / localStorage.counttime) * 10) / 10;
 
-  fetch("/api/average", { method: "POST", body: JSON.stringify({ point: tensuu }), headers: { "content-type": "application/json" } }).then(x => x.text()).then(x => console.log(x));
+  fetch("/api/average", { method: "POST", body: JSON.stringify({ point: tensuu, username: localStorage.username }), headers: { "content-type": "application/json" } }).then(x => x.text()).then(x => console.log(x));
 
   if (tensuu === 70) review = "普通だねwwwwwwwwww";
   else if (tensuu > 70) review = "無駄な才能が一つ見つかったねwwwwwwwww";
