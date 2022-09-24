@@ -22,8 +22,12 @@ var flagStop = document.querySelector("#flagStop");
 var game = document.querySelector("#game");
 var how = document.querySelector("#howTo");
 var worldaverage = document.getElementById("worldaverage");
-if (!localStorage.name){
-  alert();
+if (!localStorage.username){
+  let name;
+  while (!name) {
+    name = prompt("あなたの名前を入力してください(入力しない場合「匿名」)", "匿名");
+  }
+  localStorage.username = name;
 }
 if (location.href.includes("github") && !location.href.includes("preview")) location.href = "https://francegame.vercel.app";
 fetch("/api/average")
@@ -40,7 +44,7 @@ how.addEventListener("click", (e) => {
     html: `
     <div style="color:black">
     <h2>操作方法</h2>
-    <p>Sを押すと国旗がストップします</p>
+    <p>Sを押す(スマホの場合画面タップ)と国旗がストップします</p>
     <p>出来上がったものが実際の国旗に近いほど高得点です</p>
     </div>
     `,
@@ -60,7 +64,6 @@ how.addEventListener("click", (e) => {
 if (isNaN(localStorage.countpoint)) {
   localStorage.countpoint = 0;
   localStorage.counttime = 0;
-  localStorage.name = 0;
 }
 const spx2 = document.diff.spx2;
 const ita = document.diff.ita;
