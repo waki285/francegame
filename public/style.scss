@@ -1,7 +1,6 @@
 @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
 $fb: #002780;
-$fc: #fff;
 $fr: #f31931;
 $wd: 1152px;
 $ht: 924px;
@@ -77,25 +76,12 @@ input[type="checkbox"] {
     color: $bColor;
     background: $lColor;
   }
-  &[disabled] {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-  &[disabled]:hover {
-    box-shadow: 3px 3px #666666;
-    color: $lColor;
-    background: $bColor;
-  }
 }
 
-.btn-blue {
+#gameStart {
   @include baseButton($fb);
 }
 
-.btn-red {
+#howTo {
   @include baseButton($fr);
-}
-
-.btn-white {
-  @include baseButton($fc, #000);
 }

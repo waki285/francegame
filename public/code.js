@@ -6,30 +6,10 @@ canvas.setAttribute(
   "style",
   "display:block;margin:auto;background-color: #ffffff"
 );
-
-const waitWhile = (condition) => {
-  console.log(bothStopped);
-  console.log(enemyPoint)
-  return new Promise((resolve) => {
-    const interval = setInterval(() => {
-      if (condition()) {
-        clearInterval(interval);
-        resolve();
-      }
-    }, 100);
-  });
-};
-
 var hWid = 100;
 var canMove = true;
 var tensuu;
 var review;
-let heartbeat;
-let enemyPoint;
-let enemyname;
-let bothStopped = false;
-let meStopped = false;
-let gameRoomId;
 var canStart = false;
 var moreEnter = 1;
 var fin = 0;
@@ -42,11 +22,8 @@ var gameStart = document.querySelector("#gameStart");
 var flagStop = document.querySelector("#flagStop");
 var game = document.querySelector("#game");
 var how = document.querySelector("#howTo");
-const battleStart = document.querySelector("#battleStart");
-const createRoom = document.querySelector("#createRoom");
-const joinRoom = document.querySelector("#joinRoom");
 var worldaverage = document.getElementById("worldaverage");
-if (!localStorage.username) {
+if (!localStorage.username){
   let name;
   while (!name) {
     name = prompt("あなたの名前を入力してください(入力しない場合「匿名」)", "匿名");
@@ -55,7 +32,7 @@ if (!localStorage.username) {
 }
 if (location.href.includes("github") && !location.href.includes("preview")) location.href = "https://francegame.vercel.app";
 fetch("/api/average")
-  .then(x => x.json()).then(x => worldaverage.innerText = Math.round(x.average));
+.then(x => x.json()).then(x => worldaverage.innerText = Math.round(x.average));
 gameStart.addEventListener("click", (e) => {
   e.preventDefault();
   run();
@@ -85,86 +62,9 @@ how.addEventListener("click", (e) => {
     },
   });
 });
-battleStart.addEventListener("click", (e) => {
-  e.preventDefault();
-  battleStart.setAttribute("disabled", "disabled");
-  Swal.fire({
-    html: `
-    <div style="color:black">
-    <h2 id="finding">相手を探しています。</h2>
-    <p id="findingtext">お待ちください...</p>
-    </div>
-    `,
-    showConfirmButton: false,
-    showCancelButton: true,
-    cancelButtonText: "キャンセル",
-    width: "40rem",
-    allowOutsideClick: false,
-    background:
-      "linear-gradient(90deg, #002780 0%, #002780 33.3%, #ffffff 33.3%, #ffffff 66.6%, #f31931 66.6%, #f31931 100%)",
-    showClass: {
-      popup: "animate__animated animate__zoomInUp animate__fast",
-    },
-    hideClass: {
-      popup: "animate__animated animate__zoomOutDown animate__fast",
-    },
-  })
-  .then((result) => {
-    if (result.dismiss === Swal.DismissReason.cancel) {
-      ws.close();
-      battleStart.removeAttribute("disabled");
-    }
-  });
-  const ws = new WebSocket(`ws${location.protocol.includes("https") ? "s" : ""}://${location.hostname}:5001`);
-  ws.addEventListener("open", (e) => {
-    ws.send(JSON.stringify({ type: "join", username: localStorage.username, pid: localStorage.pid }));
-    heartbeat = setInterval(() => {
-      try {
-        ws.send(JSON.stringify({ type: "heartbeat" }));
-      } catch (e) {
-        console.error(e);
-        alert("エラーが発生しました。");
-      }
-    }, 10000);
-  });
-  ws.addEventListener("message", (e) => {
-    const data = JSON.parse(e.data);
-    if (data.type === "ready") {
-      gameRoomId = data.gameRoomId;
-      document.querySelector(".swal2-cancel").disabled = true
-      document.getElementById("finding").innerText = "相手が見つかりました！";
-      document.getElementById("findingtext").innerText = "3";
-      setTimeout(() => {
-        document.getElementById("findingtext").innerText = "2";
-      }, 1000);
-      setTimeout(() => {
-        document.getElementById("findingtext").innerText = "1";
-      }, 2000);
-      setTimeout(() => {
-        document.getElementById("findingtext").innerText = "スタート！";
-        bStart();
-      }, 3000);
-    } else if (data.type === "enemyPoint") {
-      if (meStopped) {
-        bothStopped = true;
-      }
-      enemyPoint = data.point;
-      enemyname = data.username;
-    }
-  });
-  function bStart() {
-    Swal.close();
-    setTimeout(() => {
-      run(ws);
-    }, 1000)
-  }
-});
 if (isNaN(localStorage.countpoint)) {
   localStorage.countpoint = 0;
   localStorage.counttime = 0;
-}
-if (!localStorage.pid) {
-  localStorage.pid = Math.random().toString(36).slice(-8);
 }
 const spx2 = document.diff.spx2;
 const ita = document.diff.ita;
@@ -256,7 +156,7 @@ const Invisible = () => {
 
 let isAllowed = true;
 
-const run = (socket) => {
+const run = () => {
   game.insertBefore(canvas, flagStop);
   localStorage.setItem("1.5", spx2.checked);
   localStorage.setItem("world", ita.value);
@@ -284,21 +184,20 @@ const run = (socket) => {
     if (!isAllowed) return;
     if (e.key === "s") {
       isAllowed = false;
-      whenStop(socket);
+      whenStop();
     }
   });
   document.body.addEventListener("touchstart", (e) => {
     if (!isAllowed) return;
     isAllowed = false;
-    whenStop(socket);
+    whenStop();
   })
 
   init();
   loop();
 };
 
-/** @param {WebSocket} socket */
-const whenStop = async (socket) => {
+const whenStop = () => {
   tensuu = 100 - Math.abs(nomoto.x - mikio.x - 200);
   if (tensuu < 0) {
     tensuu = 0;
@@ -314,64 +213,20 @@ const whenStop = async (socket) => {
   else if (tensuu > 70) review = "無駄な才能が一つ見つかったねwwwwwwwww";
   else review = "ざっこwwwwwwww";
   canMove = !canMove;
-  if (!socket) {
-    Swal.fire({
-      title: tensuu + "点!!!" + review,
-      text: "平均点:" + avg,
-      confirmButtonText: "もう一回遊べるドン！",
-      confirmButtonColor: "#f31931",
-      showClass: {
-        popup: "animate__animated animate__zoomIn",
-      },
-      hideClass: {
-        popup: "animate__animated animate__zoomOut",
-      },
-      allowOutsideClick: () => false
-    }).then((result) => {
-      isAllowed = false;
-      location.reload();
-    });
-  } else {
-    meStopped = true;
-    socket.send(JSON.stringify({ type: "stop", point: tensuu, gameRoomId, pid: localStorage.pid }));
-    if (bothStopped) {
-      socket.close();
-      Swal.fire({
-        title: tensuu + "点!!!" + review,
-        text: "相手: " + enemyPoint + "点\n\n" + (tensuu > enemyPoint ? "勝ち" : tensuu === enemyPoint ? "引き分け" : "負け"),
-        confirmButtonText: "もう一回遊べるドン！",
-        confirmButtonColor: "#f31931",
-        showClass: {
-          popup: "animate__animated animate__zoomIn",
-        },
-        hideClass: {
-          popup: "animate__animated animate__zoomOut",
-        },
-        allowOutsideClick: () => false
-      }).then((result) => {
-        isAllowed = false;
-        location.reload();
-      });
-    } else {
-      Swal.fire({
-        title: tensuu + "点!!!" + review,
-        html: `<p id="rr">相手が終わるまでお待ち下さい</p>`,
-        confirmButtonText: "もう一回遊べるドン！",
-        confirmButtonColor: "#f31931",
-        showClass: {
-          popup: "animate__animated animate__zoomIn",
-        },
-        hideClass: {
-          popup: "animate__animated animate__zoomOut",
-        },
-        allowOutsideClick: () => false
-      }).then((result) => {
-        isAllowed = false;
-        location.reload();
-      });
-      await waitWhile(() => bothStopped || enemyPoint !== undefined);
-      document.getElementById("rr").innerText = `相手(${enemyname}): ` + enemyPoint + "点\n\n" + (tensuu > enemyPoint ? "勝ち" : tensuu === enemyPoint ? "引き分け" : "負け");
-      socket.close();
-    }
-  }
+  Swal.fire({
+    title: tensuu + "点!!!" + review,
+    text: "平均点:" + avg,
+    confirmButtonText: "もう一回遊べるドン！",
+    confirmButtonColor: "#f31931",
+    showClass: {
+      popup: "animate__animated animate__zoomIn",
+    },
+    hideClass: {
+      popup: "animate__animated animate__zoomOut",
+    },
+    allowOutsideClick: () => false
+  }).then((result) => {
+    isAllowed = false;
+    location.reload();
+  });
 };

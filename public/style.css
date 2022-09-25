@@ -43,7 +43,7 @@ input[type=checkbox]:checked + label:before {
   letter-spacing: 5px;
 }
 
-.btn-blue {
+#gameStart {
   display: inline-block;
   font-size: 10pt;
   text-align: center;
@@ -57,22 +57,13 @@ input[type=checkbox]:checked + label:before {
   text-decoration: none;
   border: 2px solid #002780;
 }
-.btn-blue:hover {
+#gameStart:hover {
   box-shadow: none;
   color: #002780;
   background: white;
 }
-.btn-blue[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.btn-blue[disabled]:hover {
-  box-shadow: 3px 3px #666666;
-  color: white;
-  background: #002780;
-}
 
-.btn-red {
+#howTo {
   display: inline-block;
   font-size: 10pt;
   text-align: center;
@@ -86,46 +77,8 @@ input[type=checkbox]:checked + label:before {
   text-decoration: none;
   border: 2px solid #f31931;
 }
-.btn-red:hover {
+#howTo:hover {
   box-shadow: none;
   color: #f31931;
   background: white;
-}
-.btn-red[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.btn-red[disabled]:hover {
-  box-shadow: 3px 3px #666666;
-  color: white;
-  background: #f31931;
-}
-
-.btn-white {
-  display: inline-block;
-  font-size: 10pt;
-  text-align: center;
-  cursor: pointer;
-  padding: 12px 12px;
-  background: #fff;
-  color: #000;
-  line-height: 0.1em;
-  transition: 0.3s;
-  box-shadow: 3px 3px #666666;
-  text-decoration: none;
-  border: 2px solid #fff;
-}
-.btn-white:hover {
-  box-shadow: none;
-  color: #fff;
-  background: #000;
-}
-.btn-white[disabled] {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-.btn-white[disabled]:hover {
-  box-shadow: 3px 3px #666666;
-  color: #000;
-  background: #fff;
 }/*# sourceMappingURL=style.css.map */
