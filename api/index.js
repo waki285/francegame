@@ -56,4 +56,4 @@ app.get("/api/all-average", async (req, res) => {
   res.json(bo.map(x => String(x.point) + " " + x.username));
 })
 
-app.listen(8080, () => console.log("Running5"));
+app.listen(process.env.PORT || 8080, () => console.log("Running5"));
