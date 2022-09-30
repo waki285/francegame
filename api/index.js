@@ -4,6 +4,7 @@ const express = require("express");
 const app = express();
 const path = require("node:path");
 const mongoose = require("mongoose");
+require("./ws");
 
 const schema = new mongoose.Schema({
     point: Number,
